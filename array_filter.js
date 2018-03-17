@@ -1,8 +1,28 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 
-function isBigEnough(element, index, array) {
-  return (element >= 10)
-}
+if (!Array.prototype.filter) {
+  Array.prototype.filter = function(fun /*, thisp */) {
+    'use strict'
 
-const filtered = [12, 5, 8, 130, 44].filter(isBigEnough)
-console.log(filtered)
+    if (this === null) throw new TypeError()
+
+    let
+      t = Object(this),
+      len = t.length >>> 0
+
+    if (typeof fun !== 'function') throw new TypeError()
+
+    let
+      res = [],
+      thisp = arguments[1]
+
+    for (let i = 0; i < len; i++) {
+      if (i in t) {
+        let val = t[i]
+        if (fun.call(thisp, val, i, t)) res.push(val)
+      }
+    }
+
+    return res
+  }
+}
