@@ -1,9 +1,14 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 
-let v1 = 'abc'
-let v2 = true
-let v3 = 10
-let v4 = Symbol('foo')
+let target = Object.defineProperty({}, 'foo', {
+  value: 1,
+  writable: false,
+})
 
-let obj = Object.assign({}, v1, null, v2, undefined, v3, v4)
-console.log(obj)
+Object.assign(target, {bar: 2}, {foo2: 3, foo3: 3}, {baz: 4})
+
+console.log(target.bar)
+console.log(target.foo2)
+console.log(target.foo)
+console.log(target.foo3)
+console.log(target.baz)
