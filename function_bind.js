@@ -1,14 +1,16 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 
-const sampleModule = {
-  x: 42,
-  getX: function() {
-    return this.x
-  }
+function list() {
+  return Array.prototype.slice.call(arguments)
 }
 
-const retrieveX = sampleModule.getX
-console.log(retrieveX()) // The function gets invoked at the global scope
+const list1 = list(1, 2, 3)
 
-const boundGetX = retrieveX.bind(sampleModule)
-console.log(boundGetX())
+const leadingThirtysevenList = list.bind(undefined, 37)
+
+const list2 = leadingThirtysevenList()
+const list3 = leadingThirtysevenList(1, 2, 3)
+
+console.log(list1)
+console.log(list2)
+console.log(list3)
