@@ -1,8 +1,8 @@
 // https://developer.mozilla.org/ja/docs/Web/API/Document/readyState
 
-// alternative DOMContentLoaded event
+// alternative load event
 document.onreadystatechange = () => {
-  if (document.readyState === 'interactive') {
+  if (document.readyState === 'complete') {
     // do something
   }
 }
