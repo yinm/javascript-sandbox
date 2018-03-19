@@ -1,16 +1,16 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 
-function list() {
-  return Array.prototype.slice.call(arguments)
+function LateBloomer() {
+  this.petalCount = Math.floor(Math.random() * 12) + 1
 }
 
-const list1 = list(1, 2, 3)
+LateBloomer.prototype.bloom = function() {
+  setTimeout(this.declare.bind(this), 1000)
+}
 
-const leadingThirtysevenList = list.bind(undefined, 37)
+LateBloomer.prototype.declare = function() {
+  console.log(`I am a beautiful flower with ${this.petalCount} petals!`)
+}
 
-const list2 = leadingThirtysevenList()
-const list3 = leadingThirtysevenList(1, 2, 3)
-
-console.log(list1)
-console.log(list2)
-console.log(list3)
+const flower = new LateBloomer()
+flower.bloom()
