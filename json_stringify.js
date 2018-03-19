@@ -1,2 +1,5 @@
-const foo = {foundation: 'Mozilla', model: 'box', week: 45, transport: 'car', month: 7}
-console.log(JSON.stringify(foo, ['week', 'month']))
+console.log(JSON.stringify({a: 2}))
+
+console.log(JSON.stringify({a: 2}, null, ' '))
+
+console.log(JSON.stringify({ uno: 1, dos: 2 }, null, '\t'))
