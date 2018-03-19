@@ -1,16 +1,28 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Function/bind
 
-function LateBloomer() {
-  this.petalCount = Math.floor(Math.random() * 12) + 1
-}
+if (!Function.prototype.bind) {
+  Function.prototype.bind = function(oThis) {
+    if (typeof this !== 'function') {
+      // closest thing possible to the ECMAScript 5
+      // internal IsCallable function
+      throw new TypeError("Function.prototype.bind - what is trying to be bound is not callable")
+    }
 
-LateBloomer.prototype.bloom = function() {
-  setTimeout(this.declare.bind(this), 1000)
-}
+    const
+      aArgs = Array.prototype.slice.call(arguments, 1),
+      fToBind = this,
+      fNOP = function() {},
+      fBound = function() {
+        return fToBind.apply(this instanceof fNOP && oThis
+          ? this
+          : oThis,
+          aArgs.concat(Array.prototype.slice.call(arguments))
+        )
+      }
 
-LateBloomer.prototype.declare = function() {
-  console.log(`I am a beautiful flower with ${this.petalCount} petals!`)
-}
+    fNOP.prototype = this.prototype
+    fBound.prototype = new fNOP()
 
-const flower = new LateBloomer()
-flower.bloom()
+    return fBound
+  }
+}
