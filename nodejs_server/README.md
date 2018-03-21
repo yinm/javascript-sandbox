@@ -1,0 +1,1 @@
+ref: [ExpressなしでNode.jsで簡単なWebサーバを作ってみる、HTTPを学ぶ - Qiita](https://qiita.com/Sekky0905/items/31214fdeae477468fd83)
