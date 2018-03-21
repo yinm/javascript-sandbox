@@ -1,0 +1,1 @@
+ref: [node.jsで外部ファイルのJavaScriptを呼び出す - Node.js/JavaScript入門](http://kaworu.jpn.org/javascript/node.js%E3%81%A7%E5%A4%96%E9%83%A8%E3%83%95%E3%82%A1%E3%82%A4%E3%83%AB%E3%81%AEJavaScript%E3%82%92%E5%91%BC%E3%81%B3%E5%87%BA%E3%81%99)

@@ -1,0 +1,3 @@
+exports.func = () => {
+  return 'Foo'
+}
