@@ -10,7 +10,10 @@ server.on('request', (req, res) => {
       return res.end()
     }
 
-    res.writeHead(200, {'Content-Type': 'text/plain'})
+    res.writeHead(200, {
+      'Content-Type': 'text/plain',
+      'Access-Control-Allow-Origin': '*'
+    })
     res.write(data)
     res.end()
   })
