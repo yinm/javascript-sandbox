@@ -7,14 +7,37 @@
 </head>
 <body>
 <script>
-  function reqListener() {
-    console.log(this.responseText)
+  const req = new XMLHttpRequest()
+
+  req.addEventListener('progress', updateProgress, false)
+  req.addEventListener('load', transferComplete, false)
+  req.addEventListener('error', transferFailed, false)
+  req.addEventListener('abort', transferCanceled, false)
+
+  req.open('GET', 'http://localhost:8888/example.txt')
+  req.send()
+
+  function updateProgress(evt) {
+    if (evt.lengthComputable) {
+      console.log('発火してる？？')
+      let percentComplete = evt.loaded / evt.total
+      console.log(percentComplete)
+    } else {
+      // Unable to compute progress information since the total size is unknown
+    }
   }
 
-  const oReq = new XMLHttpRequest()
-  oReq.addEventListener('load', reqListener)
-  oReq.open('GET', 'http://localhost:8888/example.txt')
-  oReq.send()
+  function transferComplete(evt) {
+    alert('The transfer is complete.')
+  }
+
+  function transferFailed(evt) {
+    alert('An error occurred while transferring the file.')
+  }
+
+  function transferCanceled(evt) {
+    alert('The transfer has been canceled by the user.')
+  }
 </script>
 </body>
 </html>
