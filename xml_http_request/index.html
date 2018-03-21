@@ -1,0 +1,20 @@
+<!-- https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>XHR</title>
+</head>
+<body>
+<script>
+  function reqListener() {
+    console.log(this.responseText)
+  }
+
+  const oReq = new XMLHttpRequest()
+  oReq.addEventListener('load', reqListener)
+  oReq.open('GET', 'http://localhost:8888/example.txt')
+  oReq.send()
+</script>
+</body>
+</html>
