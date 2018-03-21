@@ -12,7 +12,7 @@ server.on('request', (req, res) => {
 
     res.writeHead(200, {
       'Content-Type': 'text/plain',
-      'Access-Control-Allow-Origin': 'http://172.16.101.30:55556'
+      'Access-Control-Allow-Origin': '*'
     })
     res.write(data)
     res.end()
