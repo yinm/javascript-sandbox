@@ -7,9 +7,8 @@
 <body>
 <script>
   const xhr = new XMLHttpRequest()
-  xhr.open('POST', 'http://localhost:3000/index.php')
+  xhr.open('GET', 'http://localhost:3000/index.php')
   xhr.withCredentials = true
-  xhr.setRequestHeader('X-YINM-TEST', 'aaaaaaaaaaaaaaaaaaaaaaa')
   xhr.addEventListener('load', function() {
     console.log(this.responseText)
   }, false)
