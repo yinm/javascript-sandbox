@@ -3,125 +3,18 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <title>Sending forms with FormData &ndash; MDN</title>
+  <title></title>
   <script>
-    'use strict'
-
-    function ajaxSuccess() {
-      console.log(this.responseText)
+    function getHeaderTime() {
+      console.log(this.getResponseHeader('Last-Modified'))
     }
 
-    function ajaxSubmit (formElement) {
-      if (!formElement.action) { return }
-
-      const req = new XMLHttpRequest()
-      req.onload = ajaxSuccess
-
-      if (formElement.method.toLowerCase() === 'post') {
-        req.open('post', formElement.action)
-        req.send(new FormData(formElement))
-      } else {
-        let
-          field,
-          fieldType,
-          file,
-          search = ''
-
-        for (let item = 0; item < formElement.elements.length; item++) {
-          field = formElement.elements[item]
-          if (!field.hasAttribute('name')) { continue }
-          fieldType = field.nodeName.toUpperCase() === 'INPUT'
-            ? field.getAttribute('type').toUpperCase()
-            : "TEXT"
-
-          if (fieldType === 'FILE') {
-            for (file = 0; file < field.files.length; search += '&' + escape(field.name) + '=' + escape(field.files[file++].name));
-          } else if ((fieldType !== 'RADIO' && fieldType !== 'CHECKBOX') || field.checked) {
-            search += '&' + escape(field.name) + '=' + escape(field.value)
-          }
-        }
-
-        req.open('get', formElement.action.replace(/(?:\?.*)?$/, search.replace(/^&/, '?')), true)
-        req.send(null)
-      }
-    }
+    const req = new XMLHttpRequest()
+    req.open('HEAD', 'register.php')
+    req.onload = getHeaderTime
+    req.send()
   </script>
 </head>
 <body>
-<h1>Sending forms with FormData</h1>
-
-<h2>Using the GET method</h2>
-<form action="register.php" method="get" onsubmit="ajaxSubmit(this); return false;">
-  <fieldset>
-    <legend>Registration example</legend>
-    <p>
-      First name: <input type="text" name="firstname"><br>
-      Last name: <input type="text" name="lastname">
-    </p>
-    <p>
-      <input type="submit" value="Submit">
-    </p>
-  </fieldset>
-</form>
-
-<h2>Using the POST method</h2>
-
-<h3>Enctype: application/x-www-form-urlencoded (default)</h3>
-<form action="register.php" method="post" enctype="application/x-www-form-urlencoded" onsubmit="ajaxSubmit(this); return false;">
-  <fieldset>
-    <legend>Registration example</legend>
-    <p>
-      First name: <input type="text" name="firstname"><br>
-      Last name: <input type="text" name="lastname">
-    </p>
-    <p>
-      <input type="submit" value="Submit">
-    </p>
-  </fieldset>
-</form>
-
-<h3>Enctype: text/plain</h3>
-<p>The text/plain encoding is not supported by the FormData API.</p>
-
-<h3>Enctype: multipart/form-data</h3>
-<form action="register.php" method="post" enctype="multipart/form-data" onsubmit="ajaxSubmit(this); return false;">
-  <fieldset>
-    <legend>Upload example</legend>
-    <p>
-      First name: <input type="text" name="firstname"><br>
-      Last name: <input type="text" name="lastname"><br>
-      Sex:
-      <input id="sex_male" type="radio" name="sex" value="male">
-      <label for="sex_male">Male</label>
-      <input id="sex_female" type="radio" name="sex" value="female">
-      <label for="sex_female">Female</label>
-      <br>
-      Password: <input type="password" name="secret"><br>
-      What do you prefer:
-      <select name="image_type">
-        <option>Books</option>
-        <option>Cinema</option>
-        <option>TV</option>
-      </select>
-    </p>
-    <p>
-      Post your photos:
-      <input type="file" multiple name="photos[]">
-    </p>
-    <p>
-      <input id="vehicle_bike" type="checkbox" name="vehicle[]" value="Bike">
-      <label for="vehicle_bike">I have a bike</label><br>
-      <input id="vehicle_car" type="checkbox" name="vehicle[]" value="Car">
-      <label for="vehicle_car">I have a car</label>
-    </p>
-    <p>
-      Describe yourself:<br>
-      <textarea name="description" cols="50" rows="8"></textarea>
-    </p>
-    <p>
-      <input type="submit" value="Submit">
-    </p>
-  </fieldset>
-</form>
 </body>
 </html>
