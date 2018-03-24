@@ -1,3 +1,4 @@
+<!-- https://developer.mozilla.org/ja/docs/Web/Guide/AJAX/Getting_Started -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,33 +6,40 @@
   <title>Title</title>
 </head>
 <body>
-<button id="ajaxButton" type="button">リクエストを実行</button>
+<label>
+  Your name:
+  <input type="text" id="ajaxTextbox">
+</label>
+<span id="ajaxButton" style="cursor: pointer; text-decoration: underline">
+  Make a request
+</span>
+
 <script>
   (function() {
     let httpRequest
-    document.getElementById('ajaxButton').addEventListener('click', makeRequest)
+    document.getElementById('ajaxButton').onclick = () => {
+      const userName = document.getElementById('ajaxTextbox').value
+      makeRequest('test.php', userName)
+    }
 
-    function makeRequest() {
+    function makeRequest(url, userName) {
       httpRequest = new XMLHttpRequest()
 
-      if (!httpRequest) {
-        alert('中断')
-        return false
-      }
       httpRequest.onreadystatechange = alertContents
-      httpRequest.open('GET', 'test.xml')
-      httpRequest.send()
+      httpRequest.open('POST', url)
+      httpRequest.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+      httpRequest.send(`userName=${encodeURIComponent(userName)}`)
     }
 
     function alertContents() {
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
-          const xmldoc = httpRequest.responseXML
-          console.log(xmldoc)
-          const rootNode = xmldoc.getElementsByTagName('root').item(0)
-          alert(rootNode.firstChild.data)
+          console.log(httpRequest.responseText)
+          const response = JSON.parse(httpRequest.responseText)
+          console.log(response)
+          alert(response.computedString)
         } else {
-          console.log(httpRequest.status)
+          alert('There was a problem with the request.')
         }
       }
     }
