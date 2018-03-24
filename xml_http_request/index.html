@@ -1,48 +1,242 @@
 <!-- https://developer.mozilla.org/ja/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest -->
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>XHR</title>
+  <meta charset="utf-8">
+  <title>Sending forms with pure Ajax &ndash; MDN</title>
+  <script>
+    'use strict'
+
+    if (!XMLHttpRequest.prototype.sendAsBinary) {
+      XMLHttpRequest.prototype.sendAsBinary = (sData) => {
+        const
+          nBytes = sData.length,
+          ui8Data = new Uint8Array(nBytes)
+
+        for (let nIdx = 0; nIdx < nBytes; nIdx++) {
+          ui8Data[nIdx] = sData.charCodeAt(nIdx) & 0xff
+        }
+
+        this.send(ui8Data)
+      }
+    }
+
+    const AjaxSubmit = (function() {
+      function ajaxSuccess() {
+        console.log(this.responseText)
+      }
+
+      function submitData(oData) {
+        const oAjaxReq = new XMLHttpRequest()
+        oAjaxReq.submittedData = oData
+        oAjaxReq.onload = ajaxSuccess
+
+        if (oData.technique === 0) {
+          // method is GET
+          oAjaxReq.open(
+            'get',
+            oData.receiver.replace(/(?:\?.*)?$/, oData.segments.length > 0 ? '?' + oData.segments.join('&') : ''),
+            true
+          )
+          oAjaxReq.send(null)
+        } else {
+          // method is POST
+          oAjaxReq.open('post', oData.receiver, true)
+          if (oData.technique === 3) {
+            // enctype is multipart/form-data
+            const sBoundary = '---------------------------' + Data.now().toString(16)
+            oAjaxReq.setRequestHeader('Content-Type', 'multipart/form-data; boundary=' + sBoundary)
+            oAjaxReq.sendAsBinary('--' + sBoundary + "\r\n" +
+              oData.segments.join('--' + sBoundary + "\r\n") + '--' + sBoundary + "--\r\n")
+          } else {
+            // enctype is application/x-www-form-urlencoded or text/plain
+            oAjaxReq.setRequestHeader('Content-Type', oData.contentType)
+            oAjaxReq.send(oData.segments.join(oData.technique === 2 ? "\r\n" : '&'))
+          }
+        }
+      }
+
+      function processStatus(oData) {
+        if (oData.status > 0) { return }
+        console.log('AjaxSubmit - The form is now serialized. Submitting....')
+        submitData(oData)
+      }
+
+      function pushSegment(oFREvt) {
+        this.owner.segments[this.segmentIdx] += oFREvt.target.result + "\r\n"
+        this.owner.status--
+        processStatus(this.owner)
+      }
+
+      function plainEscape(sText) {
+        return sText.replace(/[\s=\\]/g, "\\$&")
+      }
+
+      function SubmitRequest(oTarget) {
+        let
+          nFile,
+          sFieldType,
+          oField,
+          oSegmReq,
+          oFile
+
+        const
+          bIsPost = oTarget.method.toLowerCase() === 'post'
+
+        console.log('AjaxSubmit - Serializing form...')
+
+        this.contentType = bIsPost && oTarget.enctype ? oTarget.enctype : 'application/x-www-form-urlencoded'
+        this.technique =
+          bIsPost
+            ? this.contentType === 'multipart/form-data'
+              ? 3
+              : this.contentType === 'text/plain'
+                ? 2
+                : 1
+            : 0
+        this.receiver = oTarget.action
+        this.status = 0
+        this.segments = []
+
+        const fFileter = this.technique === 2 ? plainEscape : escape
+
+        for (let nItem = 0; nItem < oTarget.elements.length; nItem++) {
+          oField = oTarget.elements[nItem]
+          if (!oField.hasAttribute('name')) { continue }
+          sFieldType = oField.nodeName.toUpperCase() === 'INPUT' ? oField.getAttribute('type').toUpperCase() : 'TEXT'
+          if (sFieldType === 'FILE' && oField.files.length > 0) {
+            if (this.technique === 3) {
+              // enctype is multipart/form-data
+              for (nFile = 0; nFile < oField.files.length; nFile++) {
+                oFile = oField.files[nFile]
+                oSegmReq = new FileReader()
+
+                // custom properties
+                oSegmReq.segmentIdx = this.segments.length
+                oSegmReq.owner = this
+
+                oSegmReq.onload = pushSegment
+                this.segments.push('Content-Disposition: form-data; name="' +
+                  oField.name + '"; filename="' + oFile.name +
+                  "\"\r\nContent-Type: " + oFile.type + "\r\n\r\n")
+                this.status++
+                oSegmReq.readAsBinaryString(oFile)
+              }
+            } else {
+              // enctype is
+              //  application/x-www-form-urlencoded or
+              //  text/plain or
+              //  method is GET
+              // files will not be sent!
+              for (nFile = 0; nFile < oField.files.length; this.segments.push(fFileter(oField.name) + '=' + fFileter(oField.files[nFile++].name)));
+            }
+          } else if ((sFieldType !== 'RADIO' && sFieldType !== 'CHECKBOX') || oField.checked) {
+            this.segments.push(
+              this.technique === 3
+                ? 'Content-Disposition: form-data; name="' + oField.name + "\"\r\n\r\n" + oField.value + "\r\n"
+                : fFileter(oField.name) + '=' + fFileter(oField.value)
+            )
+          }
+        }
+        processStatus(this)
+      }
+
+      return function (oFormElement) {
+        if (!oFormElement.action) { return; }
+        new SubmitRequest(oFormElement)
+      }
+    })()
+  </script>
 </head>
 <body>
-<script>
-  const req = new XMLHttpRequest()
+<h1>Sending forms with pure Ajax</h1>
 
-  req.addEventListener('progress', updateProgress, false)
-  req.addEventListener('load', transferComplete, false)
-  req.addEventListener('error', transferFailed, false)
-  req.addEventListener('abort', transferCanceled, false)
-  req.addEventListener('loadend', loadEnd, false)
+<h2>Using the GET method</h2>
+<form action="register.php" method="get" onsubmit="AjaxSubmit(this); return false;">
+  <fieldset>
+    <legend>Registration example</legend>
+    <p>
+      First name: <input type="text" name="firstname"><br>
+      Last name: <input type="text" name="lastname">
+    </p>
+    <p>
+      <input type="submit" value="Submit">
+    </p>
+  </fieldset>
+</form>
 
-  req.open('GET', 'http://localhost:8888/example.txt')
-  req.send()
+<h2>Using the POST method</h2>
 
-  function updateProgress(evt) {
-    if (evt.lengthComputable) {
-      console.log('発火してる？？')
-      let percentComplete = evt.loaded / evt.total
-      console.log(percentComplete)
-    } else {
-      // Unable to compute progress information since the total size is unknown
-    }
-  }
+<h3>Enctype: application/x-www-form-urlencoded (default)</h3>
+<form action="register.php" method="post" onsubmit="AjaxSubmit(this); return false;">
+  <fieldset>
+    <legend>Registration example</legend>
+    <p>
+      First name: <input type="text" name="firstname"><br>
+      Last name: <input type="text" name="lastname">
+    </p>
+    <p>
+      <input type="submit" value="Submit">
+    </p>
+  </fieldset>
+</form>
 
-  function transferComplete(evt) {
-    alert('The transfer is complete.')
-  }
+<h3>Enctype: text/plain</h3>
+<form action="register.php" method="post" enctype="text/plain" onsubmit="AjaxSubmit(this); return false;">
+  <fieldset>
+    <legend>Registration example</legend>
+    <p>
+      Your name: <input type="text" name="user">
+    </p>
+    <p>
+      Your message:<br>
+      <textarea name="message" cols="40" rows="8"></textarea>
+    </p>
+    <p>
+      <input type="submit" value="Submit">
+    </p>
+  </fieldset>
+</form>
 
-  function transferFailed(evt) {
-    alert('An error occurred while transferring the file.')
-  }
-
-  function transferCanceled(evt) {
-    alert('The transfer has been canceled by the user.')
-  }
-
-  function loadEnd(evt) {
-    alert("The transfer finished (although we don't know if it succeeded or not).")
-  }
-</script>
+<h3>Enctype: multipart/form-data</h3>
+<form action="register.php" method="post" enctype="multipart/form-data" onsubmit="AjaxSubmit(this); return false;">
+  <fieldset>
+    <legend>Upload example</legend>
+    <p>
+      First name: <input type="text" name="firstname"><br>
+      Last name: <input type="text" name="lastname"><br>
+      Sex:
+      <input id="sex_male" type="radio" name="sex" value="male">
+      <label for="sex_male">Male</label>
+      <input id="sex_female" type="radio" name="sex" value="female">
+      <label for="sex_female">Female</label>
+      <br>
+      Password: <input type="password" name="secret"><br>
+      What do you prefer:
+      <select name="image_type">
+        <option>Books</option>
+        <option>Cinema</option>
+        <option>TV</option>
+      </select>
+    </p>
+    <p>
+      Post your photos:
+      <input type="file" multiple name="photos[]">
+    </p>
+    <p>
+      <input id="vehicle_bike" type="checkbox" name="vehicle[]" value="Bike">
+      <label for="vehicle_bike">I have a bike</label><br>
+      <input id="vehicle_car" type="checkbox" name="vehicle[]" value="Car">
+      <label for="vehicle_car">I have a car</label>
+    </p>
+    <p>
+      Describe yourself:<br>
+      <textarea name="description" cols="50" rows="8"></textarea>
+    </p>
+    <p>
+      <input type="submit" value="Submit">
+    </p>
+  </fieldset>
+</form>
 </body>
 </html>
