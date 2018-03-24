@@ -6,13 +6,27 @@
   <title></title>
   <script>
     function getHeaderTime() {
-      console.log(this.getResponseHeader('Last-Modified'))
+      const lastVisit = parseFloat(window.localStorage.getItem('lm_' + this.filepath))
+      const lastModified = Date.parse(this.getResponseHeader('Last-Modified'))
+
+      if (isNaN(lastVisit) || lastModified > lastVisit) {
+        window.localStorage.setItem('lm_' + this.filepath, Date.now())
+        isFinite(lastVisit) && this.callback(lastModified, lastVisit)
+      }
     }
 
-    const req = new XMLHttpRequest()
-    req.open('HEAD', 'register.php')
-    req.onload = getHeaderTime
-    req.send()
+    function ifHasChanged(url, callback) {
+      const req = new XMLHttpRequest()
+      req.open('HEAD', url)
+      req.callback = callback
+      req.filepath = url
+      req.onload = getHeaderTime
+      req.send()
+    }
+
+    ifHasChanged('register.php', function(modified, visit) {
+      console.log(`The page ${this.filepath} has been changed on ${(new Date(modified)).toLocaleString()}!`)
+    })
   </script>
 </head>
 <body>

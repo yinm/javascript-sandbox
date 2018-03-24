@@ -1,6 +1,6 @@
 <?php
 header('Content-type: text/plain');
-header('Last-Modified: Wed, 21 Oct 2015 07:28:00 GMT');
+header('Last-Modified: Wed, 21 Oct 2018 07:28:00 GMT');
 
 echo ":: data received via GET ::\n\n";
 print_r($_GET);
