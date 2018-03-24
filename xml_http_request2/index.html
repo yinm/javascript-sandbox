@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<button id="ajaxButton" type="button">リクエストを実行</button>
+<script>
+  (function() {
+    let httpRequest
+    document.getElementById('ajaxButton').addEventListener('click', makeRequest)
+
+    function makeRequest() {
+      httpRequest = new XMLHttpRequest()
+
+      if (!httpRequest) {
+        alert('中断')
+        return false
+      }
+      httpRequest.onreadystatechange = alertContents
+      httpRequest.open('GET', 'test.html')
+      httpRequest.send()
+    }
+
+    function alertContents() {
+      if (
+        httpRequest.readyState === XMLHttpRequest.DONE &&
+        httpRequest.status === 200
+      ) {
+        alert(httpRequest.responseText)
+      } else {
+        console.log(httpRequest.readyState)
+        console.log(httpRequest.status)
+      }
+    }
+  })()
+</script>
+</body>
+</html>
