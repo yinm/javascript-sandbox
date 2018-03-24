@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CORS</title>
+</head>
+<body>
+<script>
+  const xhr = new XMLHttpRequest()
+  xhr.open('GET', 'http://localhost:3000/index.php')
+  xhr.addEventListener('load', function() {
+    console.log(this.responseText)
+  }, false)
+  xhr.send(null)
+</script>
+</body>
+</html>
