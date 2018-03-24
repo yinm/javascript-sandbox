@@ -19,14 +19,17 @@
         return false
       }
       httpRequest.onreadystatechange = alertContents
-      httpRequest.open('GET', 'test.html')
+      httpRequest.open('GET', 'test.xml')
       httpRequest.send()
     }
 
     function alertContents() {
       if (httpRequest.readyState === XMLHttpRequest.DONE) {
         if (httpRequest.status === 200) {
-          alert(httpRequest.responseText)
+          const xmldoc = httpRequest.responseXML
+          console.log(xmldoc)
+          const rootNode = xmldoc.getElementsByTagName('root').item(0)
+          alert(rootNode.firstChild.data)
         } else {
           console.log(httpRequest.status)
         }
