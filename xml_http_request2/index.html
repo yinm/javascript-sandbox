@@ -24,14 +24,12 @@
     }
 
     function alertContents() {
-      if (
-        httpRequest.readyState === XMLHttpRequest.DONE &&
-        httpRequest.status === 200
-      ) {
-        alert(httpRequest.responseText)
-      } else {
-        console.log(httpRequest.readyState)
-        console.log(httpRequest.status)
+      if (httpRequest.readyState === XMLHttpRequest.DONE) {
+        if (httpRequest.status === 200) {
+          alert(httpRequest.responseText)
+        } else {
+          console.log(httpRequest.status)
+        }
       }
     }
   })()
