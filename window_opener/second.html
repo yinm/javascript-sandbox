@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Second</title>
+  <script>
+    function closeSampleWindow() {
+      window.opener.document.getElementById('sampleWindow-opener-2').textContent = 'ウィンドウを閉じました'
+      window.close()
+    }
+  </script>
+</head>
+<body>
+<button onclick="closeSampleWindow()">閉じるで！</button>
+</body>
+</html>

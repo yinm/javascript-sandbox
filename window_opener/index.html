@@ -1,0 +1,23 @@
+<!-- http://alphasis.info/2013/07/javascript-windowobject-opener/ -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>opener</title>
+  <script>
+    function openSampleWindow() {
+      const sampleWindow = window.open('./second.html')
+      sampleWindow.opener.document.getElementById('sampleWindow-opener-1').textContent = 'ウィンドウを開きました'
+    }
+  </script>
+</head>
+<body>
+<div class="sample">
+  <button onclick="openSampleWindow()">新たにウィンドウを開く</button>
+  <br>
+  <span id="sampleWindow-opener-1"></span>
+  <br>
+  <span id="sampleWindow-opener-2"></span>
+</div>
+</body>
+</html>
