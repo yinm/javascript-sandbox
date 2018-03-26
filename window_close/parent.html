@@ -1,0 +1,29 @@
+<!-- https://developer.mozilla.org/ja/docs/Web/API/Window/close -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Parent</title>
+  <script>
+    let openedWindow
+
+    function openWindow() {
+      openedWindow = window.open('child.html')
+      console.log(openedWindow)
+    }
+
+    function closeOpenedWindow() {
+      openedWindow.close()
+    }
+
+    function closeCurrentWindow() {
+      window.close()
+    }
+  </script>
+</head>
+<body>
+<button onclick="openWindow()">子ウィンドウを開く</button>
+<button onclick="closeOpenedWindow()">子ウィンドウを閉じる</button>
+<button onclick="closeCurrentWindow()">自分を閉じる</button>
+</body>
+</html>
