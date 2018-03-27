@@ -1,2 +1,2 @@
-const myString = 'Hello World. How are you doing?'
-console.log(myString.split(" ", 3))
+const myString = 'Hello 1 word. Sentence number 2.'
+console.log(myString.split(/(\d)/))
