@@ -1,2 +1,4 @@
-const myString = 'Hello 1 word. Sentence number 2.'
-console.log(myString.split(/(\d)/))
+const str = 'asdfghjkl'
+console.log(str.split(''))
+console.log(str.split('').reverse())
+console.log(str.split('').reverse().join(''))
