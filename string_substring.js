@@ -1,8 +1,14 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/substring
-const anyString = 'Mozilla'
+function replaceString(oldS, newS, fullS) {
+  for (let i = 0; i < fullS.length; i++) {
+    if (fullS.substring(i, i + oldS.length) == oldS) {
+      fullS = fullS.substring(0, i) +
+        newS +
+        fullS.substring(i + oldS.length, fullS.length)
+    }
+  }
 
-const anyString4 = anyString.substring(anyString.length - 4)
-console.log(anyString4)
+  return fullS
+}
 
-const anyString5 = anyString.substring(anyString.length - 5)
-console.log(anyString5)
+console.log(replaceString("World", "Web", "Brave New World"))
