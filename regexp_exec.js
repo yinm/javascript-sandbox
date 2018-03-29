@@ -1,10 +1,12 @@
-const myReg = /d(b+)(d)/ig
-const myArray = myReg.exec("cdbBdbsbz")
+// https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/RegExp/exec
 
-console.log(myReg)
-console.log(myArray)
-console.log(myArray[0])
-console.log(myArray[1])
-console.log(myArray[2])
-console.log(myArray['index'])
-console.log(myArray['input'])
+const myReg = /ab*/g
+const str = 'abbcdefabh'
+console.log(`str.length: ${str.length}`)
+
+let myArray
+while ((myArray = myReg.exec(str)) !== null) {
+  let message = `${myArray[0]} を見つけました。`
+  message += `次のマッチは ${myReg.lastIndex} からです`
+  console.log(message)
+}
