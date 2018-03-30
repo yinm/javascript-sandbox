@@ -2,11 +2,12 @@
 
 const parsedJson = JSON.parse('{"one": 1, "two": 2, "three": true}', (key, value) => {
   console.log(key)
-  if (key === '') return value
+  console.log(value)
+
   if (Number.isFinite(value)) {
     return String(value * 2)
   } else {
-    return undefined  // return only integer
+    return undefined
   }
 })
 
