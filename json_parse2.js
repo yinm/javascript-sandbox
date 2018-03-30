@@ -1,13 +1,12 @@
 // http://www.task-notes.com/entry/20160719/1468858991
 
-const parsedJson = JSON.parse('{"one": 1, "two": 2, "three": true}', (key, value) => {
-  console.log(key)
-  console.log(value)
+const parsedJson = JSON.parse('[1, 2, true]', (i, value) => {
+  console.log(`${i}:${value}`)
 
   if (Number.isFinite(value)) {
-    return String(value * 2)
+    return String(value)
   } else {
-    return undefined
+    return value
   }
 })
 
