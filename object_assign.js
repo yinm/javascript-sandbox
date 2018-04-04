@@ -1,34 +1,11 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 
-let obj = {
-  foo: 1,
-  get bar() {
-    return 2
-  }
+const object1 = {
+  a: 1,
+  b: 2,
+  c: 3,
 }
 
-let copy = Object.assign({}, obj)
-console.log(copy)
+const object2 = Object.assign({c: 4, d: 5}, object1)
 
-function completeAssign(target, ...sources) {
-  sources.forEach(source => {
-    let descriptors = Object.keys(source).reduce((descriptors, key) => {
-      descriptors[key] = Object.getOwnPropertyDescriptor(source, key)
-      return descriptors
-    }, {});
-
-    Object.getOwnPropertySymbols(source).forEach(sym => {
-      let descriptor = Object.getOwnPropertyDescriptor(source, sym)
-      if (descriptor.enumerable) {
-        descriptors[sym] = descriptor
-      }
-    })
-
-    Object.defineProperties(target, descriptors)
-  })
-
-  return target
-}
-
-let copy2 = completeAssign({}, obj)
-console.log(copy2)
+console.log(object2.c, object2.d)
