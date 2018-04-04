@@ -1,17 +1,8 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 
-const words = [
-  'spray',
-  'limit',
-  'elite',
-  'exuberant',
-  'destruction',
-  'present',
-]
+function isBigEnough(value) {
+  return value >= 10
+}
 
-const result = words.filter(word => {
-  console.log(word)
-  return word.length > 6
-})
-
-console.log(result)
+const filterd = [12, 5, 8, 130, 44].filter(isBigEnough)
+console.log(filterd)
