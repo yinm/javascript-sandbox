@@ -1,12 +1,31 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/filter
 
-const fruits = ['apple', 'banana', 'grapes', 'mango', 'orange',]
+if (!Array.prototype.filter)
+  Array.prototype.filter = function(func, thisArg) {
+    'use string'
+    if ( ! ((typeof func === 'Function' || typeof func === 'function') && this) )
+      throw new TypeError()
 
-const filterItems = (query, items) => {
-  return items.filter((el) =>
-    el.toLowerCase().indexOf(query.toLowerCase()) > -1
-  )
-}
+    var
+      len = this.length >>> 0,
+      res = new Array(len), // preallocate array
+      t = this,
+      c = 0,
+      i = -1
 
-console.log(filterItems('ap', fruits))
-console.log(filterItems('an', fruits))
+    if (thisArg === undefined)
+      while (++i !== len)
+        // checks to see if the key was set
+        if (i in this)
+          if (func(t[i], i, t))
+            res[c++] = t[i]
+    else
+      while (++i !== len)
+        //checks to see if the key was set
+        if (i in this)
+          if (func.call(thisArg, t[i], i, t))
+            res[c++] = t[i]
+
+    res.length = c // shrink down array to proper size
+    return res
+  }
