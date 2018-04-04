@@ -2,10 +2,10 @@
 
 const fruits = ['apple', 'banana', 'grapes', 'mango', 'orange',]
 
-function filterItems(query, items) {
-  return items.filter((el) => {
-    return el.toLocaleString().indexOf(query.toLowerCase()) > -1
-  })
+const filterItems = (query, items) => {
+  return items.filter((el) =>
+    el.toLowerCase().indexOf(query.toLowerCase()) > -1
+  )
 }
 
 console.log(filterItems('ap', fruits))
