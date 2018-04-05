@@ -1,7 +1,3 @@
-const months = ['March', 'Jan', 'Feb', 'Dec',]
-months.sort()
-console.log(months)
-
-const array1 = [1, 30, 4, 21,]
-array1.sort()
-console.log(array1)
+const numbers = [4, 2, 5, 1, 3]
+numbers.sort((a, b) => a - b)
+console.log(numbers)
