@@ -1,34 +1,26 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/sort
 
-const items = [
-  { name: 'Edward', value: 21 },
-  { name: 'Sharpe', value: 37 },
-  { name: 'And', value: 45 },
-  { name: 'The', value: -12 },
-  { name: 'Magnetic', value: 13 },
-  { name: 'Zeros', value: 37 },
-]
+const
+  stringArray = ['Blue', 'Humpback', 'Beluga'],
+  numericStringArray = ['80', '9', '700'],
+  numberArray = [40, 1, 5, 200],
+  mixedNumericArray = ['80', '9', '700', 40, 1, 5, 200]
 
-// sort by value
-items.sort((a, b) => a.value - b.value)
+function compareNumbers(a, b) {
+  return a - b
+}
 
-console.log(items)
+console.log('stringArray:', stringArray.join())
+console.log('ソート結果:', stringArray.sort())
 
-// sort by name
-items.sort((a, b) => {
-  const nameA = a.name.toUpperCase()  // ignore upper and lowercase
-  const nameB = b.name.toUpperCase()  // ignore upper and lowercase
+console.log('numberArray:', numberArray.join())
+console.log('比較関数なしのソート結果', numberArray.sort())
+console.log('compareNumbers:', numberArray.sort(compareNumbers))
 
-  if (nameA < nameB) {
-    return -1
-  }
+console.log('numericStringArray:', numericStringArray.join())
+console.log('比較関数なしのソート結果', numericStringArray.sort())
+console.log('compareNumbers:', numericStringArray.sort(compareNumbers))
 
-  if (nameA > nameB) {
-    return 1
-  }
-
-  // names must be equal
-  return 0
-})
-
-console.log(items)
+console.log('mixedNumericArray:', mixedNumericArray.join())
+console.log('比較関数なしのソート結果:', mixedNumericArray.sort())
+console.log('compareNumbers:', mixedNumericArray.sort(compareNumbers))
