@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<script>
+  window.addEventListener('message', (e) => {
+    if (e.origin !== 'http://172.20.10.4:32814') return
+    console.log(e.data)
+    e.source.postMessage('World', e.origin)
+  }, false)
+</script>
+</body>
+</html>

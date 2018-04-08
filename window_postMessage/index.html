@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+  <!-- ref: https://qiita.com/yasumodev/items/d339a875b4b9bf65d156 -->
+  <iframe id="ifrm" src="http://172.20.10.4:6810/index.html" style="display:none;"></iframe>
+
+  <script>
+    window.onload = () => {
+      const iframe = document.getElementById('ifrm').contentWindow
+      iframe.postMessage('Hello', 'http://172.20.10.4:6810/')
+    }
+
+    window.addEventListener('message', (e) => {
+      alert(e.data)
+    }, false)
+  </script>
+</body>
+</html>
