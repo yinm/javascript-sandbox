@@ -16,13 +16,12 @@ function sampleResolve2(value) {
   })
 }
 
-function sample() {
-  const promiseA = sampleResolve(5)
-  const promiseB = sampleResolve(10)
-  const promiseC = promiseB.then(value => sampleResolve2(value))
 
-  return Promise.all([promiseA, promiseB, promiseC])
-    .then(([a, b, c]) => [a, b, c])
+async function sample() {
+  const [a, b] = await Promise.all([sampleResolve(5), sampleResolve(10)])
+  const c = await sampleResolve2(b)
+
+  return [a, b, c]
 }
 
 sample().then(([a, b, c]) => console.log(a, b, c))
