@@ -1,5 +1,6 @@
 // https://qiita.com/soarflat/items/1a9613e023200bbebcb3
 
+// 2nd
 function sampleResolve(value) {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -14,7 +15,7 @@ async function sample() {
     return await sum + await sampleResolve(value) * 2
   }, 0)
 
-  return sum
+  return sum;
 }
 
 sample().then(v => console.log(v))
