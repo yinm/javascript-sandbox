@@ -9,15 +9,15 @@ function sampleResolve(value) {
 }
 
 async function sample() {
-  return await sampleResolve(5) * await sampleResolve(10) + await sampleResolve(20)
+  for (let i = 0; i < 5; i++) {
+    const result = await sampleResolve(i)
+    console.log(result)
+  }
+
+  return 'loop end'
 }
 
-async function sample2() {
-  const a = await sampleResolve(5)
-  const b = await sampleResolve(10)
-  const c = await sampleResolve(20)
-  return a * b + c
-}
-
-sample().then(v => console.log(v))
-sample2().then(v => console.log(v))
+sample().then((v) => {
+  console.log('-----------------')
+  console.log(v)
+})
