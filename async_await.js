@@ -6,7 +6,7 @@ function throwError() {
       try {
         throw new Error('Error occurred')
         resolve('No error')
-      } catch (err) {
+      } catch(err) {
         reject(err)
       }
     }, 1000)
@@ -14,11 +14,7 @@ function throwError() {
 }
 
 async function errorHandling() {
-  try {
-    return await throwError()
-  } catch (err) {
-    throw err
-  }
+  return await throwError()
 }
 
 errorHandling().catch(err => console.log(err))
