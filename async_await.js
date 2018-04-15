@@ -1,6 +1,5 @@
 // https://qiita.com/soarflat/items/1a9613e023200bbebcb3
 
-// 2nd
 function sampleResolve(value) {
   return new Promise(resolve => {
     setTimeout(() => {
@@ -9,9 +8,10 @@ function sampleResolve(value) {
   })
 }
 
-async function sample() {
-  const result = await sampleResolve(5)
-  return result + 5
+function sample() {
+  return sampleResolve(5).then(result => {
+    return result + 5
+  })
 }
 
 sample().then(result => {
