@@ -4,16 +4,28 @@ function sampleResolve(value) {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(value * 2)
-    }, 2000)
+    }, 1000)
   })
 }
 
 function sample() {
-  return sampleResolve(5).then(result => {
-    return result + 5
-  })
+  let result = 0
+
+  return sampleResolve(5)
+    .then(value => {
+      result += value
+      return sampleResolve(10)
+    })
+    .then(value => {
+      result += value
+      return sampleResolve(20)
+    })
+    .then(value => {
+      result += value
+      return result
+    })
 }
 
-sample().then(result => {
-  console.log(result)
+sample().then(v => {
+  console.log(v)
 })
