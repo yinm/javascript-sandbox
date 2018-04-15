@@ -5,22 +5,20 @@ function throwError() {
     setTimeout(() => {
       try {
         throw new Error('Error occurred')
-        resolve('No Error')
-      } catch(err) {
+        resolve('No error')
+      } catch (err) {
         reject(err)
       }
     }, 1000)
   })
 }
 
-function errorHandling() {
-  return throwError()
-    .then(result => result)
-    .catch((err) => {
-      throw err
-    })
+async function errorHandling() {
+  try {
+    return await throwError()
+  } catch (err) {
+    throw err
+  }
 }
 
-errorHandling().catch((err) => {
-  console.log(err)
-})
+errorHandling().catch(err => console.log(err))
