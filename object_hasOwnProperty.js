@@ -1,8 +1,13 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty
 
-const o = new Object()
+const buz = {
+  fog: 'stack'
+}
 
-o.prop = 'exists'
-console.log(o.hasOwnProperty('prop'))
-console.log(o.hasOwnProperty('toString'))
-console.log(o.hasOwnProperty('hasOwnProperty'))
+for (let name in buz) {
+  if (buz.hasOwnProperty(name)) {
+    console.log(`this is fog (${name}) for sure. Value: ${buz[name]}`)
+  } else {
+    console.log(name)
+  }
+}
