@@ -1,15 +1,10 @@
 // https://qiita.com/hrdaya/items/291276a5a20971592216
 
-function nl2br(str) {
-  return str.replace(/\n/g, '<br>')
+function tab2space(str, num) {
+  num = parseInt(num, 10)
+  const space = new Array(isNaN(num) ? 5 : num + 1).join(' ')
+  return str.replace(/\t/g, space)
 }
 
-const stringWithBr = nl2br('a\nbb\ncccc<br />')
-
-
-function br2nl(str) {
-  return str.replace(/(<br>|<br \/>)/gi, '\n')
-}
-
-console.log(stringWithBr)
-console.log(br2nl(stringWithBr))
+console.log(tab2space('foo\tbar', 'a'))
+console.log(tab2space('foo\tbar', 10))
