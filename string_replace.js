@@ -4,4 +4,12 @@ function nl2br(str) {
   return str.replace(/\n/g, '<br>')
 }
 
-console.log(nl2br('a\nbb\ncccc'))
+const stringWithBr = nl2br('a\nbb\ncccc<br />')
+
+
+function br2nl(str) {
+  return str.replace(/(<br>|<br \/>)/gi, '\n')
+}
+
+console.log(stringWithBr)
+console.log(br2nl(stringWithBr))
