@@ -6,7 +6,10 @@ class Cat {
   }
 }
 
-const tama = new Cat('たま', 9, 'もも')
-
+let tama = new Cat('たま', 9, 'もも')
 console.log(tama)
-console.log(tama.name === 'たま')
+
+let cat = Object.assign({}, tama)
+tama.name = 'タマ'
+console.log(tama.name)
+console.log(cat.name)
