@@ -1,14 +1,9 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 
-const obj = Object.create({foo: 1}, {
-  bar: {
-    value: 2
-  },
-  baz: {
-    value: 3,
-    enumerable: true
-  }
-})
+const v1 = 'abc'
+const v2 = true
+const v3 = 10
+const v4 = Symbol('foo')
 
-const copy = Object.assign({}, obj)
-console.log(copy)
+const obj = Object.assign({}, v1, null, v2, undefined, v3, v4)
+console.log(obj)
