@@ -1,8 +1,14 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 
-let o1 = {a: 1}
-let o2 = {[Symbol('foo')]: 2}
+const obj = Object.create({foo: 1}, {
+  bar: {
+    value: 2
+  },
+  baz: {
+    value: 3,
+    enumerable: true
+  }
+})
 
-const obj = Object.assign({}, o1, o2)
-console.log(obj)
-console.log(Object.getOwnPropertySymbols(obj))
+const copy = Object.assign({}, obj)
+console.log(copy)
