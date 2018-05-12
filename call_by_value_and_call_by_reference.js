@@ -2,7 +2,11 @@
 
 let a, b
 a = [0, 1, 2]
-b = a.concat()
+b = []
+
+for (let i = 0, l = a.length; i < l; i++) {
+  b.push(a[i])
+}
 console.log(b)
 
 b[0] = 5
