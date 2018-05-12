@@ -3,4 +3,5 @@
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = 123;
+var D = 123;
+exports.default = D;
