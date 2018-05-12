@@ -1,6 +1,10 @@
-"use strict";
+'use strict';
 
-var _lib = require("./lib");
+var _lib = require('./lib');
 
-console.log((0, _lib.square)(11));
-console.log((0, _lib.diag)(4, 3));
+var lib = _interopRequireWildcard(_lib);
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) newObj[key] = obj[key]; } } newObj.default = obj; return newObj; } }
+
+console.log(lib.square(11));
+console.log(lib.diag(4, 3));

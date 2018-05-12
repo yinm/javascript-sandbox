@@ -1,3 +1,3 @@
-import { square, diag } from "./lib"
-console.log(square(11))
-console.log(diag(4, 3))
+import * as lib from './lib'
+console.log(lib.square(11))
+console.log(lib.diag(4, 3))
