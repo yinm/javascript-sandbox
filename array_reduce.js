@@ -1,7 +1,12 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
 
-const array1 = [1, 2, 3, 4]
-const reducer = (accumulator, currentValue) => accumulator + currentValue
+const maxCallback = (acc, cur) => Math.max(acc.x, cur.x)
+const maxCallback2 = (max, cur) => Math.max(max, cur)
 
-console.log(array1.reduce(reducer))
-console.log(array1.reduce(reducer, 5))
+console.log([{x: 22}, {x: 42}].reduce(maxCallback))
+console.log([{x: 22}].reduce(maxCallback))
+// console.log([].reduce(maxCallback))
+
+let mapped = [{x: 22}, {x: 42}].map(el => el.x)
+console.log(mapped)
+console.log(mapped.reduce(maxCallback2, -Infinity))
