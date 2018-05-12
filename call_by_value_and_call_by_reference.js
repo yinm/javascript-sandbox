@@ -1,14 +1,15 @@
 // https://qiita.com/migi/items/3417c2de685c368faab1
 
 let a, b
-a = [0, 1, 2]
-b = []
+a = {x: 0, y: 0}
+console.log(a)
 
-for (let i = 0, l = a.length; i < l; i++) {
-  b.push(a[i])
-}
+b = JSON.stringify(a)
 console.log(b)
 
-b[0] = 5
+b = JSON.parse(b)
+console.log(b)
+
+b.x = 5
 console.log(b)
 console.log(a)
