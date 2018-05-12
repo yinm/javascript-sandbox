@@ -1,0 +1,16 @@
+{
+  "name": "export",
+  "version": "1.0.0",
+  "description": "ref: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/export",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
