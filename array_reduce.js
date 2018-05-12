@@ -1,13 +1,16 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce
 
-const result = [0, 1, 2, 3, 4].reduce((accumulator, currentValue, currentIndex, array) => {
-  console.log(accumulator)
-  console.log(currentValue)
-  console.log(currentIndex)
-  console.log(array)
-  console.log('---------------------')
+const flattened = [[0, 1], [2, 3], [4, 5]].reduce(
+  (accumulator, currentValue) => {
+    console.log(accumulator)
+    console.log(currentValue)
 
-  return accumulator + currentValue
-}, 10)
+    let result = accumulator.concat(currentValue)
+    console.log(result)
+    console.log('-----------------')
 
-console.log(result)
+    return result
+  },
+  []
+)
+console.log(flattened)
