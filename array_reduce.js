@@ -5,9 +5,9 @@ const result = [0, 1, 2, 3, 4].reduce((accumulator, currentValue, currentIndex, 
   console.log(currentValue)
   console.log(currentIndex)
   console.log(array)
-  console.log('------------------------')
+  console.log('---------------------')
 
   return accumulator + currentValue
-})
+}, 10)
 
 console.log(result)
