@@ -1,35 +1,39 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 
-const obj = {
-  foo: 1,
-  get bar() {
-    return 2
-  }
-}
+Object.defineProperty(Object, 'assignPolyfill', {
+  value: function assign(target, varArgs) {
+    'use strict'
 
-let copy = Object.assign({}, obj)
-console.log(copy)
+    if (target == null) {
+      throw new TypeError('Cannot convert undefined or null to object')
+    }
 
-function completeAssign(target, ...sources) {
-  sources.forEach(source => {
-    let descriptors = Object.keys(source).reduce((descriptors, key) => {
-      descriptors[key] = Object.getOwnPropertyDescriptor(source, key)
-      return descriptors
-    }, {})
+    let to = Object(target)
 
-    // by default, Object.assign copies enumerable Symbols too
-    Object.getOwnPropertySymbols(source).forEach(sym => {
-      let descriptor = Object.getOwnPropertyDescriptor(source, sym)
-      if (descriptor.enumerable) {
-        descriptors[sym] = descriptor
+    for (let index = 1; index < arguments.length; index++) {
+      let nextSource = arguments[index]
+
+      if (nextSource != null) {
+        for (let nextKey in nextSource) {
+          // Avoid bugs when hasOwnProperty is shadowed
+          if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+            to[nextKey] = nextSource[nextKey]
+          }
+        }
       }
-    })
+    }
 
-    Object.defineProperties(target, descriptors)
-  })
+    return to
+  },
+  writable: true,
+  configurable: true,
+})
 
-  return target
+const object1 = {
+  a: 1,
+  b: 2,
+  c: 3,
 }
 
-copy = completeAssign({}, obj)
-console.log(copy)
+const object2 = Object.assignPolyfill({c: 4, d: 5,}, object1)
+console.log(object2)
