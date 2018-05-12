@@ -1,7 +1,7 @@
 // https://qiita.com/sanonosa/items/e6f503cbb95c8e6967f8
 
-let data1 = [1, 2, 3]
-let data2 = ['d', 'e', 'f']
+let [a, b, ...other] = [1, 2, 3, 4, 5]
 
-const merged = ['あ', ...data1, 'い', ...data2, 'う']
-console.log(merged)
+console.log(a)
+console.log(b)
+console.log(other)
