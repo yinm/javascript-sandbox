@@ -1,5 +1,11 @@
 // https://qiita.com/sanonosa/items/e6f503cbb95c8e6967f8
-const data = [15, -3, 78, 1]
-console.log(Math.max(...data))
 
-console.log(Math.max.apply(null, data))
+const array = ['Pen', 'Pineapple', 'apple']
+const myArray = [...array]
+
+console.log(array === myArray)
+console.log(myArray)
+
+myArray[1] = 'ぱいなっぷる'
+console.log(myArray)
+console.log(array)
