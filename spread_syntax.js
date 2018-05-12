@@ -1,12 +1,7 @@
 // https://qiita.com/sanonosa/items/e6f503cbb95c8e6967f8
 
-let fruits = [
-  {'banana': 100},
-  {'cherry': 200},
-]
-let myFruits = [...fruits]
-console.log(myFruits)
+let data1 = [1, 2, 3]
+let data2 = ['d', 'e', 'f']
 
-fruits[0].banana = 300
-console.log(fruits)
-console.log(myFruits)
+data1.push(...data2)
+console.log(data1)
