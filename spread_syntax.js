@@ -3,5 +3,5 @@
 let data1 = [1, 2, 3]
 let data2 = ['d', 'e', 'f']
 
-data1.unshift(...data2)
-console.log(data1)
+const merged = ['あ', ...data1, 'い', ...data2, 'う']
+console.log(merged)
