@@ -1,12 +1,8 @@
 // https://qiita.com/migi/items/3417c2de685c368faab1
 
-let a, b
+let a
 a = 'hoge'
-b = a
-b = 'fuga'
-console.log(b)
-console.log(a)
+console.log(a[0])
 
-a = 'hogehoge'
+a[0] = 'x'
 console.log(a)
-console.log(b)
