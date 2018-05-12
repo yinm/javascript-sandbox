@@ -1,8 +1,11 @@
 // https://qiita.com/migi/items/3417c2de685c368faab1
 
-let a
+let a, b
 a = 'hoge'
-console.log(a[0])
+b = new String('hoge')
 
-a[0] = 'x'
-console.log(a)
+console.log(typeof a)
+console.log(typeof b)
+
+console.log(a == b)
+console.log(a === b)
