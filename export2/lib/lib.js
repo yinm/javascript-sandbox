@@ -1,9 +1,6 @@
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-
-exports.default = function () {
-  console.log('the default export');
-};
+exports.default = 123;
