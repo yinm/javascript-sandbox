@@ -1,0 +1,1 @@
+ref: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Statements/export
