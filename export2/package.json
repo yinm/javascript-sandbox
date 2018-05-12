@@ -1,0 +1,16 @@
+{
+  "name": "export2",
+  "version": "1.0.0",
+  "description": "ref: https://qiita.com/senou/items/a2f7a0f717d8aadabbf7",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src -d lib"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
+  }
+}
