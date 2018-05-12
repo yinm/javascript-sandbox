@@ -1,6 +1,5 @@
 // https://qiita.com/sanonosa/items/e6f503cbb95c8e6967f8
 
-const data = ['a', 'b', 'c', 'a', 'b', 'd']
-const dist = [...(new Set(data))]
+const sum = (...nums) => nums.reduce((p, c) => p + c)
 
-console.log(dist)
+console.log(sum(1, 2, 3, 4, 5))
