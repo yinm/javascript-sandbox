@@ -43,3 +43,14 @@ function addTax(price) {
     price
   }
 }
+
+function addReducer(state, action) {
+  switch (action.type) {
+    case 'ADDTAX':
+      return (
+        Object.assign({}, state, {price: action.price * 1.08})
+      )
+    default:
+      return state
+  }
+}
