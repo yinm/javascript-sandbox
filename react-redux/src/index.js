@@ -35,3 +35,11 @@ const AppContainer = connect(
   mapStateToProps,
   mapDispatchToProps
 )(AppComponents)
+
+const ADDTAX = 'ADDTAX'
+function addTax(price) {
+  return {
+    type: ADDTAX,
+    price
+  }
+}
