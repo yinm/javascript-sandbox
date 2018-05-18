@@ -10,7 +10,7 @@ class AppComponent extends React.Component {
   }
 
   send(e) {
-    this.props.onclick(this.refs.inputText.value)
+    this.props.onClick(this.refs.inputText.value)
   }
 
   render() {
