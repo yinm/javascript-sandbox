@@ -16,3 +16,22 @@ class AppComponents extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    price: state.price
+  }
+}
+
+function mapDispatchToProps(dispatch) {
+  return {
+    onClick(price) {
+      dispatch(addTax(price))
+    }
+  }
+}
+
+const AppContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(AppComponents)
