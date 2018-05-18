@@ -1,4 +1,7 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
+import { createStore } from 'redux'
+import { Provider, connect } from 'react-redux'
 
 class AppComponent extends React.Component {
   constructor() {
@@ -59,3 +62,16 @@ function addReducer(state, action) {
       return state
   }
 }
+
+const initialState = {
+  price: ''
+}
+
+const store = createStore(addReducer, initialState)
+
+ReactDOM.render(
+  <Provider store={store}>
+    <AppContainer/>
+  </Provider>,
+  document.getElementById('root')
+)
