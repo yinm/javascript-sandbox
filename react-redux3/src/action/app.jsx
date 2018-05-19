@@ -1,4 +1,4 @@
-export default {
+export const obj =  {
   increment: () => {
     return { type: 'INCREMENT' }
   }
