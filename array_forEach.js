@@ -1,10 +1,7 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
 
-const items = ['item1', 'item2', 'item3']
-const copy = []
+function logArrayElements(element, index, array) {
+  console.log(`a[${index}] = ${element}`)
+}
 
-items.forEach((item) => {
-  copy.push(item)
-})
-
-console.log(copy)
+[2, 5, , 9,].forEach(logArrayElements)
