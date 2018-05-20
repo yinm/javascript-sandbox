@@ -1,5 +1,6 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/replace
 
-const str = 'Twas the night before Xmas...'
-const newStr = str.replace(/xmas/i, 'Christmas')
+const re = /apples/gi
+const str = 'Apples are round, and apples are juicy'
+const newStr = str.replace(re, 'oranges')
 console.log(newStr)
