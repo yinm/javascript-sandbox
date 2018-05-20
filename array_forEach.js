@@ -1,17 +1,24 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
 
-function Counter() {
-  this.sum = 0
-  this.count = 0
+function copy(obj) {
+  const copy = Object.create(Object.getPrototypeOf(obj))
+  const propNames = Object.getOwnPropertyNames(obj)
+
+  console.log(copy)
+  console.log(propNames)
+
+  propNames.forEach((name) => {
+    const desc = Object.getOwnPropertyDescriptor(obj, name)
+    console.log('desc', desc)
+
+    Object.defineProperty(copy, name, desc)
+    console.log('defineProperty', copy)
+  })
+
+  return copy
 }
 
-Counter.prototype.add = function(array) {
-  array.forEach(function(entry) {
-    this.sum += entry
-    ++this.count
-  }, this)
-}
+const obj1 = {a: 1, b: 2,}
+const obj2 = copy(obj1)
 
-const obj = new Counter()
-obj.add([2, 5, 9])
-console.log(obj)
+console.log(obj2)
