@@ -1,6 +1,11 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/String/replace
 
-const re = /(\w+)\s(\w+)/
-const str = 'John Smith'
-const newstr = str.replace(re, '$2, $1')
-console.log(newstr)
+function styleHyphenFormat(propertyName) {
+  function upperToHyphenLower(match, offset, string) {
+    return (offset > 0 ? '-' : '') + match.toLowerCase()
+  }
+  return propertyName.replace(/[A-Z]/g, upperToHyphenLower)
+}
+
+console.log(styleHyphenFormat('borderTop'))
+console.log(styleHyphenFormat('ToLowerCase'))
