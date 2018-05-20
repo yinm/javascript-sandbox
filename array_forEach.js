@@ -1,5 +1,10 @@
-const array1 = ['a', 'b', 'c']
+// https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
 
-array1.forEach((element) => {
-  console.log(element)
+const items = ['item1', 'item2', 'item3']
+const copy = []
+
+items.forEach((item) => {
+  copy.push(item)
 })
+
+console.log(copy)
