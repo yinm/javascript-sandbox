@@ -1,7 +1,17 @@
 // https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach
 
-function logArrayElements(element, index, array) {
-  console.log(`a[${index}] = ${element}`)
+function Counter() {
+  this.sum = 0
+  this.count = 0
 }
 
-[2, 5, , 9,].forEach(logArrayElements)
+Counter.prototype.add = function(array) {
+  array.forEach(function(entry) {
+    this.sum += entry
+    ++this.count
+  }, this)
+}
+
+const obj = new Counter()
+obj.add([2, 5, 9])
+console.log(obj)
