@@ -2,10 +2,12 @@
 
 function styleHyphenFormat(propertyName) {
   function upperToHyphenLower(match, offset, string) {
+    console.log(offset)
     return (offset > 0 ? '-' : '') + match.toLowerCase()
   }
+
   return propertyName.replace(/[A-Z]/g, upperToHyphenLower)
 }
 
 console.log(styleHyphenFormat('borderTop'))
-console.log(styleHyphenFormat('ToLowerCase'))
+console.log(styleHyphenFormat('ToUpperCase'))
