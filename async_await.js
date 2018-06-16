@@ -8,11 +8,12 @@ function sampleResolve(value) {
   })
 }
 
-async function sample() {
-  const result = await sampleResolve(5)
-  return result + 2
+function sample() {
+  return sampleResolve(5).then(result => {
+    return result + 5
+  })
 }
 
 sample().then(result => {
-  console.log(result) // 12
+  console.log(result)
 })
