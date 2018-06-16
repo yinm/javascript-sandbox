@@ -1,16 +1,18 @@
 // https://qiita.com/soarflat/items/1a9613e023200bbebcb3
 
-function sampleResolve() {
+function sampleResolve(value) {
   return new Promise(resolve => {
     setTimeout(() => {
-      resolve('resolve')
-    }, 1000)
+      resolve(value * 2)
+    }, 2000)
   })
 }
 
 async function sample() {
-  const result = await sampleResolve()
-
-  console.log(result)
+  const result = await sampleResolve(5)
+  return result + 2
 }
-sample()
+
+sample().then(result => {
+  console.log(result) // 12
+})
