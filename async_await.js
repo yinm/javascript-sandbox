@@ -8,19 +8,13 @@ function sampleResolve(value) {
   })
 }
 
-function sampleResolve2(value) {
-  return new Promise(resolve => {
-    setTimeout(() => {
-      resolve(value * 2)
-    }, 400)
-  })
-}
-
 async function sample() {
-  const [a, b] = await Promise.all([sampleResolve(5), sampleResolve(10)])
-  const c = await sampleResolve2(b)
+  const array = [5, 10, 20]
+  const promiseAll = await Promise.all(array.map(async value => {
+    return await sampleResolve(value) * 2
+  }))
 
-  return [a, b, c]
+  return promiseAll
 }
 
 sample().then(([a, b, c]) => {
