@@ -9,12 +9,12 @@ function sampleResolve(value) {
 }
 
 async function sample() {
-  for (let i = 0; i < 5; i += 1) {
-    let result = await sampleResolve(i)
-    console.log(result)
-  }
+  const array = [5, 10, 20]
+  const sum = await array.reduce(async (sum, value) => {
+    return await sum + await sampleResolve(value) * 2
+  }, 0)
 
-  return 'ループが終わった'
+  return sum
 }
 
 sample().then(v => console.log(v))
