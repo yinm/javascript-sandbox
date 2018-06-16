@@ -8,13 +8,21 @@ function sampleResolve(value) {
   })
 }
 
-async function sample() {
-  const array = [5, 10, 20]
-  const sum = await array.reduce(async (sum, value) => {
-    return await sum + await sampleResolve(value) * 2
-  }, 0)
-
-  return sum
+function sampleResolve2(value) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve(value * 2)
+    }, 500)
+  })
 }
 
-sample().then(v => console.log(v))
+function sample() {
+  const promiseA = sampleResolve(5)
+  const promiseB = sampleResolve(10)
+  const promiseC = promiseB.then(value => sampleResolve2(value))
+
+  return Promise.all([promiseA, promiseB, promiseC])
+    .then(([a, b, c]) => [a, b, c])
+}
+
+sample().then(([a, b, c]) => console.log(a, b, c))
