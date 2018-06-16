@@ -14,12 +14,8 @@ function throwError() {
 }
 
 async function errorHandling() {
-  try {
-    const result = await throwError()
-    return result
-  } catch (err) {
-    throw err
-  }
+  const result = await throwError()
+  return result
 }
 
 errorHandling().catch(err => console.log(err))
