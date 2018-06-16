@@ -5,7 +5,7 @@ function throwError() {
     setTimeout(() => {
       try {
         throw new Error('エラーがあったよ')
-        resolve('エラーはなかったよ')
+        resolve('エラーはなかった')
       } catch(err) {
         reject(err)
       }
@@ -13,10 +13,13 @@ function throwError() {
   })
 }
 
-function errorHandling() {
-  return throwError()
-    .then(result => result)
-    .catch(err => {throw err})
+async function errorHandling() {
+  try {
+    const result = await throwError()
+    return result
+  } catch (err) {
+    throw err
+  }
 }
 
 errorHandling().catch(err => console.log(err))
