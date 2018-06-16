@@ -4,17 +4,18 @@ function throwError() {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       try {
-        throw new Error('Error occurred')
-        resolve('No error')
+        throw new Error('エラーがあったよ')
+        resolve('エラーはなかった')
       } catch(err) {
         reject(err)
       }
-    }, 1000)
+    }, 500)
   })
 }
 
 async function errorHandling() {
-  return await throwError()
+  const result = await throwError()
+  return result
 }
 
 errorHandling().catch(err => console.log(err))
