@@ -4,26 +4,20 @@ function sampleResolve(value) {
   return new Promise(resolve => {
     setTimeout(() => {
       resolve(value)
-    }, 1000)
+    }, 500)
   })
 }
 
-function sample() {
-  let result = 0
+async function sample() {
+  return await sampleResolve(5) * await sampleResolve(10) + await sampleResolve(20)
+}
 
-  return sampleResolve(5)
-    .then(val => {
-      result += val
-      return sampleResolve(10)
-    })
-    .then(val => {
-      result += val
-      return sampleResolve(20)
-    })
-    .then(val => {
-      result += val
-      return result
-    })
+async function sample2() {
+  const a = await sampleResolve(5)
+  const b = await sampleResolve(10)
+  const c = await sampleResolve(20)
+  return a * b + c
 }
 
 sample().then(v => console.log(v))
+sample2().then(v => console.log(v))
