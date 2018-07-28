@@ -1,5 +1,7 @@
+/*globals $ */
+
 function hello(name) {
-  document.body.textContent = "Hello, " + name + "!"
+  $(document.body).text("Hello, " + name + "!")
 }
 
-hello("world");
+hello("world")
