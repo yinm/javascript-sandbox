@@ -1,12 +1,9 @@
-function forEach(items, callback) {
-  for (let index = 0; index < items.length; index++) {
-    callback(items[index])
-  }
-}
+const myMock = jest.fn()
+console.log(myMock())
 
-const mockCallback = jest.fn()
-forEach([0, 1], mockCallback)
+myMock
+  .mockReturnValueOnce(10)
+  .mockReturnValueOnce('x')
+  .mockReturnValue(true)
 
-expect(mockCallback.mock.calls.length).toBe(2)
-expect(mockCallback.mock.calls[0][0]).toBe(0)
-expect(mockCallback.mock.calls[1][0]).toBe(1)
+console.log(myMock(), myMock(), myMock(), myMock())
