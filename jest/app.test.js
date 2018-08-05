@@ -10,5 +10,5 @@ function fetchData(isRejected) {
 
 test('the data is peanut butter', () => {
   expect.assertions(1)
-  return fetchData(true).catch(e => expect(e).toMatch('error'))
+  return expect(fetchData()).resolves.toBe('peanut butter')
 })
