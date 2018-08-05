@@ -1,7 +1,11 @@
-test('there is no I in team', () => {
-  expect('team').not.toMatch(/I/)
-})
+const shoppingList = [
+  'diapers',
+  'kleenex',
+  'trash bags',
+  'paper towels',
+  'beer',
+]
 
-test('but there is a "stop" in Chiristoph', () => {
-  expect('Cristoph').toMatch(/stop/)
+test('the shopping list has beer on it', () => {
+  expect(shoppingList).toContain('beer')
 })
