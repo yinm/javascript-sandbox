@@ -1,17 +1,13 @@
-async function fetchData(isRejected) {
-  if (isRejected) {
-    throw new Error('error')
-  }
+beforeAll(() => console.log('1 - beforeAll'))
+afterAll(() => console.log('1 - afterAll'))
+beforeEach(() => console.log('1 - beforeEach'))
+afterEach(() => console.log('1 - afterEach'))
+test('', () => console.log('1 - test'))
 
-  return 'peanut butter'
-}
-
-test('the data is peanut butter', async () => {
-  expect.assertions(1)
-  await expect(fetchData(false)).resolves.toBe('peanut butter')
-})
-
-test('the fetch fails with an error', async () => {
-  expect.assertions(1)
-  await expect(fetchData(true)).rejects.toThrow('error')
+describe('Scoped / Nested block', () => {
+  beforeAll(() => console.log('2 - beforeAll'))
+  afterAll(() => console.log('2 - afterAll'))
+  beforeEach(() => console.log('2 - beforeEach'))
+  afterEach(() => console.log('2 - afterEach'))
+  test('', () => console.log('2 - test'))
 })
