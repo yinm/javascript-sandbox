@@ -8,16 +8,10 @@ async function fetchData(isRejected) {
 
 test('the data is peanut butter', async () => {
   expect.assertions(1)
-  const data = await fetchData(false)
-  expect(data).toBe('peanut butter')
+  await expect(fetchData(false)).resolves.toBe('peanut butter')
 })
 
 test('the fetch fails with an error', async () => {
   expect.assertions(1)
-
-  try {
-    await fetchData(true)
-  } catch (e) {
-    expect(e.message).toMatch('error')
-  }
+  await expect(fetchData(true)).rejects.toThrow('error')
 })
