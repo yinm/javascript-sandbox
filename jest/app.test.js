@@ -1,5 +1,7 @@
-test('adding floating point numbers', () => {
-  const value = 0.1 + 0.2
-  // expect(value).toBe(0.3)
-  expect(value).toBeCloseTo(0.3)
+test('there is no I in team', () => {
+  expect('team').not.toMatch(/I/)
+})
+
+test('but there is a "stop" in Chiristoph', () => {
+  expect('Cristoph').toMatch(/stop/)
 })
