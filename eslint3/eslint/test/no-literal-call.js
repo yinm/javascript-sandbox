@@ -19,7 +19,7 @@ tester.run('no-literal-call', require('../rule/no-literal-call'), {
     {code: '/abc/()', errors: ["This is not a function."]},
     {code: '[1, 2, 3]()', errors: ['This is not a function.']},
     {code: '({foo: 0})()', errors: ['This is not a function.']},
-    {code: '`hello`()', env: {env6: true}, errors: ['This is not a function.']},
-    {code: '(class A {})()', env: {es6: true}, errors: ['Class constructors cannot be invoked without "new"']}
+    {code: '`hello`()', env: {es6: true}, errors: ['This is not a function.']},
+    {code: '(class A {})()', env: {es6: true}, errors: ['Class constructors cannot be invoked without "new".']}
   ],
 })
