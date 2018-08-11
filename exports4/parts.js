@@ -1,2 +1,7 @@
-module.exports.value = '値'
-module.exports.foo = 'foo'
+const value = '値'
+const foo = 'foo'
+module.exports = {
+  fuga: 'fuga',
+}
+
+exports.value = value
