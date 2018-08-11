@@ -1,4 +1,5 @@
 const parts = require('./parts')
 
-console.log(parts.value)
-console.log(parts.fuga)
+console.log(parts)
+
+require('./parts')
