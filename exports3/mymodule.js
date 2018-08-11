@@ -1,2 +1,2 @@
 exports.hoge = 'hoge'
-module.exports.foo = 'foo'
+module.exports = {foo: 'foo'}
