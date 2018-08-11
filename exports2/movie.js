@@ -1,13 +1,11 @@
-const Movie = function(title) {
+module.exports = function(title) {
   this.title = title
+
+  this.sayTitle = function() {
+    say(this.title)
+  }
 }
 
-Movie.prototype.sayTitle = function() {
-  say(this.title)
-}
-
-say = function(word) {
+function say(word) {
   console.log(word)
 }
-
-module.exports = Movie
