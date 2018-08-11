@@ -1,3 +1,1 @@
-const myMod = require('./mymodule')
-
-myMod.name()
+console.log(require('./mymodule'))
