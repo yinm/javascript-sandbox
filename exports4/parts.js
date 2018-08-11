@@ -1,4 +1,7 @@
-let int = 0
-int++
+let int = 10
 
-module.exports.int = int
+function myFunc(arg) {
+  console.log(arg * int)
+}
+
+module.exports.myFunc = myFunc
