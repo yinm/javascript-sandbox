@@ -1,9 +1,12 @@
-function add(a, b) {
-  return a + b
+let int = 0
+
+function increment() {
+  int++
 }
 
-function showResult(a, b) {
-  console.log( add(a, b) )
+function get() {
+  return int
 }
 
-module.exports.showResult = showResult
+module.exports.increment = increment
+module.exports.get = get
