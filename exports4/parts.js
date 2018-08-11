@@ -1,12 +1,7 @@
-let int = 0
+console.log(module.exports === exports)
 
-function increment() {
-  int++
-}
+exports.foo = 'foo'
+console.log(module.exports === exports)
 
-function get() {
-  return int
-}
-
-module.exports.increment = increment
-module.exports.get = get
+exports = 'bar'
+console.log(module.exports === exports)
