@@ -1,4 +1,5 @@
 const parts = require('./parts')
 
-console.log(parts.int)
-parts.myFunc(2)
+parts.showResult(2, 3)
+console.log('showResult' in parts)
+console.log('add' in parts)

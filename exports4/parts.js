@@ -1,7 +1,9 @@
-let int = 10
-
-function myFunc(arg) {
-  console.log(arg * int)
+function add(a, b) {
+  return a + b
 }
 
-module.exports.myFunc = myFunc
+function showResult(a, b) {
+  console.log( add(a, b) )
+}
+
+module.exports.showResult = showResult
