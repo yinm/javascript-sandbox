@@ -1,4 +1,2 @@
-module.exports = {
-  value: '値',
-  foo: 'foo',
-}
+module.exports.value = '値'
+module.exports.foo = 'foo'
