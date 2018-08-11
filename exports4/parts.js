@@ -1,3 +1,4 @@
-const value = '値'
-const foo = 'foo'
-exports.value = value
+module.exports = {
+  value: '値',
+  foo: 'foo',
+}
