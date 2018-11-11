@@ -1,19 +1,18 @@
 // ref: https://developer.mozilla.org/ja/docs/Web/JavaScript/Reference/Operators/Object_initializer
 
-var o = {}
+const a = 'foo', b = 42, c = {}
+const o1 = {a, b, c}
 
-var o1 = { a: 'foo', b: 42, c: {} }
-
-var a = 'foo', b = 42, c = {}
-var o2 = { a: a, b: b, c: c }
-
-var o3 = {
-  property: function ([parameters]) {},
-  get property() {},
-  set property(value) {},
+const o2 = {
+  property([parameters]) {}
 }
 
-console.log(o)
+const prop = 'foo'
+const o3 = {
+  [prop]: 'hey',
+  ['b' + 'ar']: 'there'
+}
+
 console.log(o1)
 console.log(o2)
 console.log(o3)
