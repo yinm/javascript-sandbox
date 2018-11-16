@@ -1,6 +1,6 @@
-const foo = [1, 2, 3]
+let a = 1
+let b = 3;
 
-const [one, two, three] = foo
-console.log(one)
-console.log(two)
-console.log(three)
+[a, b] = [b, a]
+console.log(a)
+console.log(b)
