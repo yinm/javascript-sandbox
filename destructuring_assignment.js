@@ -1,8 +1,7 @@
 function f() {
-  return [1, 2]
+  return [1, 2, 3]
 }
 
-let a, b
-[a, b] = f()
+let [a, , b] = f()
 console.log(a)
 console.log(b)
