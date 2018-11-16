@@ -1,7 +1,12 @@
-function f() {
-  return [1, 2, 3]
+function parseProtocol(url) {
+  const parsedURL = /^(\w+)\:\/\/([^\/]+)\/(.*)$/.exec(url)
+  if (!parsedURL) {
+    return false
+  }
+  console.log(parsedURL)
+
+  const [, protocol, fullhost, fullpath] = parsedURL
+  return protocol
 }
 
-let [a, , b] = f()
-console.log(a)
-console.log(b)
+console.log(parseProtocol('https://developer.mozilla.org/en-US/Web/JavaScript?q=aaa'))
