@@ -1,5 +1,4 @@
-const o = { p: 42, q: true }
-const { p: foo, q: bar } = o
+const { a:aa = 10, b:bb = 5 } = {a: 3}
 
-console.log(foo)
-console.log(bar)
+console.log(aa)
+console.log(bb)
