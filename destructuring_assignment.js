@@ -1,6 +1,8 @@
-let a = 1
-let b = 3;
+function f() {
+  return [1, 2]
+}
 
-[a, b] = [b, a]
+let a, b
+[a, b] = f()
 console.log(a)
 console.log(b)
