@@ -1,5 +1,5 @@
 const o = { p: 42, q: true }
-const { p, q } = o
+const { p: foo, q: bar } = o
 
-console.log(p)
-console.log(q)
+console.log(foo)
+console.log(bar)
