@@ -1,13 +1,15 @@
 // ref: https://qiita.com/kura07/items/356bd37733f457d3177f
 
 const obj = {
-  method() { console.log('!') },
-  'my method'() { console.log('!') },
-  0() { console.log('!') },
-  [!true]() { console.log('!') }
+  get prop() { return Math.random() },
+  get 'my prop'() { return Math.random() },
+  get 0() { return Math.random() },
+  get [!true]() { return Math.random() }
 }
 
-obj.method()
-obj['my method']()
-obj['0']()
-obj.false()
+console.log(obj.prop)
+console.log(obj.prop)
+
+console.log(obj['my prop'])
+console.log(obj['0'])
+console.log(obj.false)
