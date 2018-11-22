@@ -1,13 +1,12 @@
 // ref: https://qiita.com/kura07/items/356bd37733f457d3177f
 
 const obj = {
-  set prop(v) { console.log(v) },
-  set "my prop"(v) { console.log(v) },
-  set 0(v) { console.log(v) },
-  set [!true](v) { console.log(v) }
+  ['pr' + 'op']: 42,
+  [1 + 2]: 42,
+  [!true]: 42,
+  [{}]: 42,
+  [function() { return 'foo' }()]: 42,
+  [Symbol()]: 42
 }
 
-obj.prop = '!'
-obj['my prop'] = 'aaa'
-obj[0] = 'foobar'
-obj.false = 'aaaaaaaaaaaaaaaa'
+console.log(obj)
