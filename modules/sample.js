@@ -1,54 +1,21 @@
-let globalVariable = {};
+const myGradesCalculate = (function() {
+  const myGrades = [93, 95, 88, 0, 55, 91]
 
-(function (globalVariable) {
-  const privateFunction = () => {
-    console.log('shhhh, this is private!')
-  }
+  return {
+    average() {
+      const total = myGrades.reduce((accumulator, item) => {
+        return accumulator + item
+      }, 0)
 
-  globalVariable.each = (collection, iterator) => {
-    if (Array.isArray(collection)) {
-      for (let i = 0; i < collection.length; i++) {
-        iterator(collection[i], i, collection)
-      }
-    } else {
-      for (let key in collection) {
-        iterator(collection[key], key, collection)
-      }
+      return `Your average grade is ${total / myGrades.length}.`
+    },
+
+    failing() {
+      const failingGrades = myGrades.filter(item => item < 70)
+      return `You failed ${failingGrades.length} times.`
     }
   }
+})()
 
-  globalVariable.filter = (collection, test) => {
-    let filtered = []
-    globalVariable.each(collection, (item) => {
-      if (test(item)) {
-        filtered.push(item)
-      }
-    })
-
-    return filtered
-  }
-
-  globalVariable.map = (collection, iterator) => {
-    let mapped = []
-    globalVariable.each(collection, (value, key, collection) => {
-      mapped.push(iterator(value))
-    })
-
-    return mapped
-  }
-
-  globalVariable.reduce = (collection, iterator, accumulator) => {
-    let startingValueMissing = accumulator === undefined
-
-    globalVariable.each(collection, (item) => {
-      if (startingValueMissing) {
-        accumulator = item
-        startingValueMissing = false
-      } else {
-        accumulator = iterator(accumulator, item)
-      }
-    })
-
-    return accumulator
-  }
-})(globalVariable)
+console.log(myGradesCalculate.failing())
+console.log(myGradesCalculate.average())
