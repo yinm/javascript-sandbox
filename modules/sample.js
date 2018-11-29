@@ -1,4 +1,6 @@
-(function() {
+const global = 'Hello, I am a global variable :)';
+
+(function () {
   const myGrades = [93, 95, 88, 0, 55, 91]
 
   const average = () => {
@@ -14,7 +16,6 @@
     return `You failed ${failingGrades.length} times.`
   }
 
-  console.log(average())
   console.log(failing())
+  console.log(global)
 })()
-
