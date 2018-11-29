@@ -1,15 +1,9 @@
-let counter = 1
+export let counter = 1
 
-function increment() {
+export function increment() {
   counter++
 }
 
-function decrement() {
+export function decrement() {
   counter--
-}
-
-module.exports = {
-  counter,
-  increment,
-  decrement
 }
