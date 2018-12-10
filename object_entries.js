@@ -7,5 +7,4 @@ const obj = {
 }
 
 console.log(Object.entries(obj))
-console.log(Object.entries(obj).map(([key, value]) => ({ key, value })))
-console.log(Object.entries(obj).map(([key, value]) => ({ 'key': key, 'value': value })))
+console.log(Object.entries(obj).map(([key, value]) => ({ [key]: value })))
