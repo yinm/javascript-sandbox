@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 const axios = require('axios')
 const express = require('express')
@@ -17,18 +17,17 @@ app.use((req, res, next) => {
 app.get('/', (req, res) => {
   if (!req.query.url) {
     const result = {
-      error: 'You must parameter => /?url=${API Address}'
+      error: 'You must parameter -> /?url=<API Address>'
     }
     res.send(result)
     return
   }
 
   axios.get(req.query.url)
-    .then((result) => {
+    .then(result => {
       console.log(result)
       res.send(result.data)
-    })
-    .catch((err) => {
+    }).catch(err => {
       console.error(err.response)
       console.error(err.response.data)
       const result = {
@@ -37,9 +36,8 @@ app.get('/', (req, res) => {
           statusText: err.response.statusText
         }
       }
-
       res.send(result)
-    })
+  })
 })
 
 app.listen(PORT)

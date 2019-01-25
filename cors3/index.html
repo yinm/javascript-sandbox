@@ -3,21 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>CORS test</title>
-  <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script>
     'use strict'
 
-    const CITY_CODE = '030010'
-    const API_URL = `http://weather.livedoor.com/forecast/webservice/json/v1?city=${CITY_CODE}`
-    const TARGET_URL = `http://localhost:3000/?url=${API_URL}`
+    const cityCode = '030010'
+    const apiUrl = `http://weather.livedoor.com/forecast/webservice/json/v1?city=${cityCode}`
+    const targetUrl = `http://localhost:3000/?url=${apiUrl}`
 
-    $.ajax({
-      url: TARGET_URL,
-      data: 'json'
-    })
-      .done((res) => {
-        console.log(res)
-      })
+    fetch(targetUrl)
+      .then(res => res.json())
+      .then(json => console.log(json))
   </script>
 </head>
 <body>
