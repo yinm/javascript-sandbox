@@ -6,45 +6,145 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
 </head>
 <body>
-<canvas id="myChart" width="400"e height="400"></canvas>
+<div><canvas id="myChart"></canvas></div>
+
+<div style="text-align:center">
+  <button id="randomizeData">ランダムデータ</button>
+  <button id="addDataset">データセットの追加</button>
+  <button id="removeDataset">データセットの削除</button>
+  <button id="addData">データの追加</button>
+  <button id="removeData">データの削除</button>
+</div>
+
 <script>
-  const ctx = document.getElementById('myChart')
-  const myChart = new Chart(ctx, {
-    type: 'bar',
+  const colorSet = {
+    red: 'rgb(255, 99, 132)',
+    orange: 'rgb(255, 159, 64)',
+    yellow: 'rgb(255, 205, 86)',
+    green: 'rgb(75, 192, 192)',
+    blue: 'rgb(54, 162, 235)',
+    purple: 'rgb(153, 102, 255)',
+    grey: 'rgb(201, 203, 207)'
+  }
+
+  function rand100() {
+    return Math.round(Math.random() * 100)
+  }
+
+  const color = Chart.helpers.color
+
+  const config = {
+    type: 'radar',
     data: {
-      labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+      labels: ['月曜', '火曜', '水曜', '木曜', '金曜', '土曜', '日曜'],
       datasets: [{
-        label: '# of Votes',
-        data: [12, 19, 3, 5, 2, 3],
-        backgroundColor: [
-          'rgba(255, 99, 132, 0.2)',
-          'rgba(54, 162, 235, 0.2)',
-          'rgba(255, 206, 86, 0.2)',
-          'rgba(75, 192, 192, 0.2)',
-          'rgba(153, 102, 255, 0.2)',
-          'rgba(255, 159, 64, 0.2)'
-        ],
-        borderColor: [
-          'rgba(255, 99, 132, 1)',
-          'rgba(54, 162, 235, 1)',
-          'rgba(255, 206, 86, 1)',
-          'rgba(75, 192, 192, 1)',
-          'rgba(153, 102, 255, 1)',
-          'rgba(255, 159, 64, 1)'
-        ],
-        borderWidth: 1
+        label: '運動量',
+        backgroundColor: color(colorSet.red).alpha(0.5).rgbString(),
+        borderColor: colorSet.red,
+        pointBackgroundColor: colorSet.red,
+        data: [40, 50, 60, 70, 80, 90, 100]
+      }, {
+        label: '摂取量',
+        backgroundColor: color(colorSet.blue).alpha(0.5).rgbString(),
+        borderColor: colorSet.blue,
+        pointBackgroundColor: colorSet.blue,
+        data: [100, 90, 80, 70, 60, 50, 40]
       }]
     },
     options: {
-      scales: {
-        yAxes: [{
-          ticks: {
-            beginAtZero: true
-          }
-        }]
+      animation: false,
+      showTooltips: false,
+      legend: { position: 'bottom' },
+      title: {
+        display: true,
+        fontSize: 20,
+        fontColor: '#666',
+        text: '一週間チャート'
+      },
+      scale: {
+        display: true,
+        positionLabels: {
+          fontSize: 15,
+          fontColor: colorSet.yellow
+        },
+        ticks: {
+          display: true,
+          fontSize: 12,
+          fontColor: colorSet.green,
+          min: 0,
+          max: 100,
+          beginAtZero: true
+        },
+        gridLines: {
+          display: true,
+          color: colorSet.yellow
+        }
       }
     }
-  })
+  }
+
+  const myRadar = new Chart(document.getElementById('myChart'), config)
+
+  document.getElementById('randomizeData').addEventListener('click', () => {
+    config.data.datasets.forEach((dataset) => {
+      dataset.data = dataset.data.map(() => {
+        return rand100()
+      })
+    })
+
+    myRadar.update()
+  }, false)
+  const colorNames = Object.keys(colorSet)
+
+  document.getElementById('addDataset').addEventListener('click', () => {
+    const colorName = colorNames[config.data.datasets.length % colorNames.length]
+    const newColor = colorSet[colorName]
+
+    const newDataset = {
+      label: `Dataset ${config.data.datasets.length}`,
+      borderColor: newColor,
+      backgroundColor: color(newColor).alpha(0.2).rgbString(),
+      pointBorderColor: newColor,
+      data: []
+    }
+
+    for (let i = 0; i < config.data.labels.length; i++) {
+      newDataset.data.push(rand100())
+    }
+
+    config.data.datasets.push(newDataset)
+    myRadar.update()
+  }, false)
+
+  document.getElementById('addData').addEventListener('click', () => {
+    if (config.data.datasets.length > 0) {
+      config.data.labels.push(`dataset #${config.data.labels.length}`)
+      config.data.datasets.forEach((dataset) => {
+        dataset.data.push(rand100())
+      })
+
+      myRadar.update()
+    }
+  }, false)
+
+  document.getElementById('removeDataset').addEventListener('click', () => {
+    config.data.datasets.splice(0, 1)
+    myRadar.update()
+  }, false)
+
+  document.getElementById('removeData').addEventListener('click', () => {
+    config.data.labels.pop()
+
+    config.data.datasets.forEach((dataset) => {
+      dataset.data.pop()
+
+      config.data.datasets.forEach((dataset) => {
+        dataset.data.pop()
+      })
+
+      myRadar.update()
+    })
+  }, false)
 </script>
 </body>
 </html>
