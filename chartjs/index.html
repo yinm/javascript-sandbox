@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Chart.js sandbox</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+</head>
+<body>
+<canvas id="myChart"></canvas>
+
+<script>
+  const ctx = document.getElementById('myChart').getContext('2d')
+  const chart = new Chart(ctx, {
+    type: 'line',
+
+    data: {
+      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+      datasets: [{
+        label: 'My First dataset',
+        backgroundColor: 'rgb(255, 99, 132)',
+        borderColor: 'rgb(0, 0, 0)',
+        data: [0, 10, 5, 2, 20, 30, 45]
+      }]
+    },
+
+    options: {}
+  })
+</script>
+</body>
+</html>
