@@ -7,6 +7,6 @@
   "devDependencies": {
     "eslint": "^1.10.3",
     "eslint-config-eslint": "^1.0.1",
-    "mocha": "^2.3.4"
+    "mocha": "^10.1.0"
   }
 }
